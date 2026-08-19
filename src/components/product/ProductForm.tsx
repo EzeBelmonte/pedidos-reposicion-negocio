@@ -4,6 +4,7 @@ import {
   Button,
   Input,
 } from "@/components";
+import { cn } from "@/utils/cn";
 
 
 type Props = {
@@ -50,42 +51,46 @@ export const ProductForm = ({
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          Marca
-          <Input 
-            value={brand}
-            onChange={(e) => setBrand(e.target.value)}
-          />
-        </label>
+    <form onSubmit={handleSubmit} className="w-[500px] flex flex-col items-center border border-white p-5 rounded">
+      <div className="w-full flex flex-col gap-5 mb-5">
+        <Input 
+          value={brand}
+          onChange={(e) => setBrand(e.target.value)}
+          placeholder="Marca"
+          className="text-[1.1rem]"
+        />
+
+        <Input 
+          value={article}
+          onChange={(e) => setArticle(e.target.value)}
+          placeholder="Artículo"
+          className="text-[1.1rem]"
+        />
       </div>
 
-      <div>
-        <label>
-          Artículo
-          <Input 
-            value={article}
-            onChange={(e) => setArticle(e.target.value)}
-          />
-        </label>
-      </div>
-
-      <Button type="submit">
-        {product
-          ? "Guardar cambios"
-          : "Agregar producto"
-        }
-      </Button>
-
-      {product && (
-        <Button
-          type="button"
-          onClick={onCancel}
+      <div className={cn(
+        product && "flex items-center gap-3"
+      )}>
+        <Button 
+          type="submit"
+          className="bg-green-700 text-[1.2rem] font-semibold px-3 py-1 rounded"
         >
-          Cancelar
+          {product
+            ? "Guardar cambios"
+            : "Agregar producto"
+          }
         </Button>
-      )}
+
+        {product && (
+          <Button
+            type="button"
+            onClick={onCancel}
+            className="bg-red-700 text-[1.2rem] font-semibold px-3 py-1 rounded"
+          >
+            Cancelar
+          </Button>
+        )}
+        </div>
     </form>
   );
 }
