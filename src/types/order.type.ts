@@ -7,6 +7,8 @@ export type OrderItem = {
 
 export type OrderList = {
   id: number;
-  supplier?: string;
+  title?: string;
   items: OrderItem[];
+  createdAt: string;
+  updatedAt: string;
 }

@@ -13,7 +13,8 @@ export default function AlertError({
 
   return (
     <div className={cn(`
-      bg-red-500/30 
+      w-[500px]
+      bg-red-500/70 
       border border-red-500/70
       mx-auto mt-10 p-2 
       rounded`,

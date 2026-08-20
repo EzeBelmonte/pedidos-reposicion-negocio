@@ -12,7 +12,7 @@ const Button = ({
   ...props }: Props) => {
   return (
     <button
-      className={`cursor-pointer ${className}`} // Puedes agregar clases adicionales si las pasas
+      className={className}
       {...props}
     >
       {children}

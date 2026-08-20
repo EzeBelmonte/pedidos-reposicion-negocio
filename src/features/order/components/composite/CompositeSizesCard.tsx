@@ -27,7 +27,7 @@ const CompositeSizesCard = ({
   }
 
   return (
-    <div className="bg-white p-5 rounded">
+    <div className="bg-white p-5 rounded border border-black">
       <h2 className="text-xl font-bold mb-4">
         Seleccionar números
       </h2>

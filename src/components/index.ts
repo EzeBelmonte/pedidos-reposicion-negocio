@@ -1,8 +1,6 @@
 // UI
 export { default as Button } from "./ui/Button";
-export { default as Image } from "./ui/Image";
 export { default as Input } from "./ui/Input";
-export { default as Textarea } from "./ui/Textarea";
 
 // UI -> LOADERS
 export { default as LoaderSection } from "./ui/loaders/LoaderSection";
