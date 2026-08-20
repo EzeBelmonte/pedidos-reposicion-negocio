@@ -1,6 +1,5 @@
-import { useState } from "react";
 
-import { useProducts } from "@/features/products/hooks/useProducts";
+import { useProductOrder } from "../hooks/useProductOrder";
 import type { OrderItem } from "@/types/order.type";
 import type { ShoeSize } from "@/types/shoes.type";
 import { 
@@ -8,6 +7,8 @@ import {
 } from "@/components";
 import Modal from "./Modal";
 import SimpleSizes from "./SimpleSizes";
+
+import SelectProduct from "./SelectProduct";
 
 type Props = {
   item: OrderItem;
@@ -25,116 +26,55 @@ const OrderProductCard = ({
   onChangeQuantity,
   onRemove,
 }: Props) => {
+
   const {
-    products,
-    isLoading,
-    error,
-  } = useProducts();
-  const [isSimpleSizeModalOpen, setIsSimpleSizeModalOpen] = useState(false);
-  const [selectedSimpleSizes, setSelectedSimpleSizes] = useState<ShoeSize[]>([]);
-  const [simpleSizes, setSimpleSizes] = useState<ShoeSize[]>([]);
+    simpleSizes,
+    isSimpleSizeModalOpen,
+    selectedSimpleSizes,
+    setSelectedSimpleSizes,
+    handleAcceptSimpleSizes,
+    handleOpenSimpleModal,
+    handleCloseSimpleModal,
+  } = useProductOrder();
 
-  const sortedProducts = [...products].sort((a, b) => {
-    const brandComparison = a.brand.localeCompare(b.brand);
+  // Agregar pares
+  const handleAdd = (
+    item: OrderItem,
+    size: ShoeSize
+  ) => {
+    const currentQuantity =
+      item.quantities[size] ?? 0;
 
-    if (brandComparison !== 0) {
-      return brandComparison;
+    onChangeQuantity(
+      size,
+      currentQuantity + 1
+    );
+  }
+  
+  // Quitar pares
+  const handleRemove = (
+    item: OrderItem,
+    size: ShoeSize
+  ) => {
+    const currentQuantity =
+      item.quantities[size] ?? 0;
+
+    if (currentQuantity > 0) {
+      onChangeQuantity(
+        size,
+        currentQuantity - 1
+      );
     }
-
-    return a.article.localeCompare(b.article);
-  });
-
-  if (isLoading) {
-    return <p>Cargando productos...</p>;
   }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-
-  const handleAcceptSimpleSizes = () => {
-    setSimpleSizes(selectedSimpleSizes);
-    setIsSimpleSizeModalOpen(false);
-  };
 
   return (
     <>
-      <article className="w-full border border-black rounded p-4 mt-4 bg-[#e5f5f5] font-semibold">
+      <article className="w-full border border-black rounded p-4 mt-4 bg-[#d5aff5] font-semibold">
         {/* Seleccionar la marca y el artículo */}
-        <select
-          value={item.productId ?? ""}
-          onChange={(e) => {
-            const value = e.target.value;
-
-            onChangeProduct(
-              value === "" ? null : Number(value)
-            );
-          }}
-          className="p-1 text-[1.1rem] border border-black"
-        >
-          <option value="">
-            Seleccionar producto
-          </option>
-
-          {sortedProducts.map((product) => (
-            <option
-              key={product.id}
-              value={product.id}
-              className="font-semibold"
-            >
-              {product.brand} - art. {product.article}
-            </option>
-          ))}
-        </select>
-
-        {/* Mostramos los números seleccionados */}
-        {simpleSizes.length > 0 && (
-          <div>
-            {simpleSizes.map((size) => (
-              <div
-                key={size}
-              >
-                <span>
-                  {size}
-                </span>
-
-                <div>
-                  <Button
-                    onClick={() => {
-                      const currentQuantity =
-                        item.quantities[size] ?? 0;
-
-                      if (currentQuantity > 0) {
-                        onChangeQuantity(
-                          size,
-                          currentQuantity - 1
-                        );
-                      }
-                    }}
-                  >
-                    -
-                  </Button>
-
-                  <span>{item.quantities[size] ?? 0}</span>
-
-                  <Button
-                    onClick={() => {
-                      const currentQuantity =
-                        item.quantities[size] ?? 0;
-
-                      onChangeQuantity(
-                        size,
-                        currentQuantity + 1
-                      );
-                    }}
-                  >
-                    +
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+        <SelectProduct 
+          item={item}
+          onChangeProduct={onChangeProduct}
+        />
 
         {/* Definir los números */}
         <div className="flex flex-col gap-2 mt-4">
@@ -142,39 +82,83 @@ const OrderProductCard = ({
             Talles
           </p>
 
-          <div className="flex gap-5">
-            <Button
-              onClick={() => {
-                setSelectedSimpleSizes(simpleSizes);
-                setIsSimpleSizeModalOpen(true)
-              }}
-            >
-              Número simple
-            </Button>
+          {/* Mostramos los números seleccionados */}
+          {simpleSizes.length > 0 && (
+            <div className="
+              flex flex-wrap gap-4 items-center
+            ">
+              {simpleSizes.map((size) => (
+                <div
+                  key={size}
+                  className="
+                    w-[46px]
+                    bg-white
+                    flex flex-col 
+                    items-center 
+                    border border-black -space-y-2 
+                    rounded"
+                >
+                  <span className="text-[1.1rem] font-bold">
+                    {size}
+                  </span>
 
-            <Button>
-              Número compuesto
+                  <div className="flex items-center">
+                    <Button
+                      onClick={() => handleRemove(item, size)}
+                      className="text-black font-bold text-[1.3rem]"
+                    >
+                      -
+                    </Button>
+
+                    <span className="mx-1">{item.quantities[size] ?? 0}</span>
+
+                    <Button
+                      onClick={() => handleAdd(item, size)}
+                      className="text-black font-bold text-[1.1rem]"
+                    >
+                      +
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="flex mt-5 justify-between">
+            <div className="flex gap-5">
+              <Button
+                onClick={handleOpenSimpleModal}
+                className="bg-blue-500 text-white px-2 py-1 rounded"
+              >
+                Número simple
+              </Button>
+
+              <Button
+                className="bg-blue-500 text-white px-2 py-1 rounded"
+              >
+                Número compuesto
+              </Button>
+            </div>
+
+            <Button
+              onClick={onRemove}
+              className="bg-red-600 text-white px-2 py-1 rounded"
+            >
+              Eliminar
             </Button>
           </div>
 
         </div>
-
-        <Button
-          onClick={onRemove}
-          className="bg-red-600 text-white px-2 py-1 rounded mt-5"
-        >
-          Eliminar
-        </Button>
       </article>
 
       <Modal
         open={isSimpleSizeModalOpen}
-        onClose={() => setIsSimpleSizeModalOpen(false)}
+        onClose={handleCloseSimpleModal}
       >
         <SimpleSizes 
           selectedSimpleSizes={selectedSimpleSizes}
           setSelectedSimpleSizes={setSelectedSimpleSizes}
-          onCancel={() => setIsSimpleSizeModalOpen(false)}
+          onCancel={handleCloseSimpleModal}
           onAccept={handleAcceptSimpleSizes}
         />
       </Modal>

@@ -8,7 +8,6 @@ import OrderProductCard from "../components/OrderProductCard";
 const Order = () => {
   const [items, setItems] = useState<OrderItem[]>([]);
 
-
   const handleAddProduct = () => {
     setItems((currentItems) => [
       ...currentItems,
