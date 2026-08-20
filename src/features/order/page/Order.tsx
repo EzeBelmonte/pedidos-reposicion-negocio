@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { CirclePlus } from "lucide-react";
+import { Link } from "react-router-dom";
+import { CirclePlus, CircleChevronLeft } from "lucide-react";
 import { useOrders } from "../hooks/useOrders";
 import type { OrderItem } from "@/types/order.type";
 import type { ShoeSize } from "@/types/shoes.type";
@@ -116,6 +117,12 @@ const Order = () => {
   return (
 
     <section className="flex flex-col items-center px-5 py-10">
+      <Link to="/">
+        <Button className="absolute top-2 left-2 font-semiboldpx-2 py-1 rounded font-semibold">
+          <CircleChevronLeft size={30} />
+        </Button>
+      </Link>
+
       <h1 className="bg-gray-600 px-5 py-1 text-white text-[1.7rem] font-bold mb-[25px] rounded">
         Armar pedido
       </h1>
@@ -132,7 +139,7 @@ const Order = () => {
         onClick={handleAddProduct}
         className="
           bg-blue-500
-          text-white text-[1.1rem] font-semibold 
+          text-white font-semibold 
           p-2 rounded-2xl
           fixed
           bottom-5 right-5"
@@ -159,7 +166,7 @@ const Order = () => {
         onClick={handleSaveOrder}
         disabled={items.length === 0}
         className={cn(`
-          text-[1.1rem] font-semibold
+          font-semibold
           px-2 py-1 mt-5
           rounded text-white`,
           items.length > 0 

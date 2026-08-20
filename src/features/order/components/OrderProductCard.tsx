@@ -1,3 +1,4 @@
+import { Trash } from "lucide-react";
 import { useProductOrder } from "../hooks/useProductOrder";
 import type { OrderItem } from "@/types/order.type";
 import type { ShoeSize } from "@/types/shoes.type";
@@ -44,7 +45,7 @@ const OrderProductCard = ({
   } = useProductOrder();
 
   return (
-    <article className="w-full border border-black rounded p-4 mt-4 bg-[#d5aff5] font-semibold">
+    <article className="w-full border border-black rounded p-4 mt-4 bg-[#2b6de7] font-semibold">
       {/* Seleccionar la marca y el artículo */}
       <SelectProduct 
         item={item}
@@ -53,7 +54,7 @@ const OrderProductCard = ({
 
       {/* Definir los números */}
       <div className="flex flex-col gap-5 mt-4">
-        <p className="text-[1.1rem]">
+        <p className="text-white">
           Talles
         </p>
 
@@ -84,14 +85,14 @@ const OrderProductCard = ({
           <div className="flex gap-5">
             <Button
               onClick={handleOpenSimpleModal}
-              className="bg-blue-500 text-white px-2 py-1 rounded"
+              className="bg-[#ffffff] text-black px-2 py-1 rounded"
             >
               Número simple
             </Button>
 
             <Button
               onClick={handleOpenCompositeModal}
-              className="bg-blue-500 text-white px-2 py-1 rounded"
+              className="bg-[#ffffff] text-black px-2 py-1 rounded"
             >
               Número compuesto
             </Button>
@@ -99,9 +100,9 @@ const OrderProductCard = ({
 
           <Button
             onClick={onRemove}
-            className="bg-red-600 text-white px-2 py-1 rounded"
+            className="bg-white text-red-600 p-1 rounded"
           >
-            Eliminar
+            <Trash />
           </Button>
         </div>
 

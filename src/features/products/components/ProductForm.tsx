@@ -50,7 +50,7 @@ export const ProductForm = ({
     setArticle("");
   }
 
-  const button = "text-[1.2rem] font-semibold px-3 py-1 rounded text-white";
+  const button = "font-semibold px-3 py-1 rounded";
 
   return (
     <form 
@@ -60,23 +60,23 @@ export const ProductForm = ({
         flex flex-col 
         items-center 
         border border-black 
-        bg-[#e5f5f5]
+        bg-[#2b6de7] 
         p-5 rounded 
-        text-black font-semibold text-[1.1rem]"
+        font-semibold"
     >
       <div className="w-full flex flex-col gap-5 mb-5">
         <Input 
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
           placeholder="Marca"
-          className="text-[1.1rem]"
+          className="bg-white"
         />
 
         <Input 
           value={article}
           onChange={(e) => setArticle(e.target.value)}
           placeholder="Artículo"
-          className="text-[1.1rem]"
+          className="bg-white"
         />
       </div>
 
@@ -85,7 +85,7 @@ export const ProductForm = ({
       )}>
         <Button 
           type="submit"
-          className={cn("bg-green-700", button)}
+          className={cn("bg-[#ffffff] text-black px-2", button)}
         >
           {product
             ? "Guardar cambios"
@@ -97,7 +97,7 @@ export const ProductForm = ({
           <Button
             type="button"
             onClick={onCancel}
-            className={cn("bg-red-700", button)}
+            className={cn("bg-[#222222] text-white", button)}
           >
             Cancelar
           </Button>
