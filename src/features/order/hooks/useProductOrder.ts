@@ -3,49 +3,67 @@ import { useState } from "react";
 import type { ShoeSize } from "@/types/shoes.type";
 
 export function useProductOrder() {
-  const [isSimpleSizeModalOpen, setIsSimpleSizeModalOpen] = useState(false);
-  const [selectedSimpleSizes, setSelectedSimpleSizes] = useState<ShoeSize[]>([]);
-  const [simpleSizes, setSimpleSizes] = useState<ShoeSize[]>([]);
+  // =========================
+  // Números simples
+  // =========================
 
-  const [isCompositeSizeModalOpen, setIsCompositeSizeModalOpen] = useState(false);
-  const [selectedCompositeSizes, setSelectedCompositeSizes] = useState<ShoeSize[]>([]);
-  const [compositeSizes, setCompositeSizes] = useState<ShoeSize[]>([]);
+  const [isSimpleSizeModalOpen, setIsSimpleSizeModalOpen] =
+    useState(false);
 
-  // Abrir Modal simple
+  const [selectedSimpleSizes, setSelectedSimpleSizes] =
+    useState<ShoeSize[]>([]);
+
+  const [simpleSizes, setSimpleSizes] =
+    useState<ShoeSize[]>([]);
+
+  // =========================
+  // Números compuestos
+  // =========================
+
+  const [isCompositeSizeModalOpen, setIsCompositeSizeModalOpen] =
+    useState(false);
+
+  const [selectedCompositeSizes, setSelectedCompositeSizes] =
+    useState<ShoeSize[]>([]);
+
+  const [compositeSizes, setCompositeSizes] =
+    useState<ShoeSize[]>([]);
+
+  // =========================
+  // Simples
+  // =========================
+
   const handleOpenSimpleModal = () => {
     setSelectedSimpleSizes(simpleSizes);
-    setIsSimpleSizeModalOpen(true)
-  }
+    setIsSimpleSizeModalOpen(true);
+  };
 
-  // Cerrar Modal simple
   const handleCloseSimpleModal = () => {
     setIsSimpleSizeModalOpen(false);
-  }
+  };
 
-  // Función para aceptar los números simples seleccionados
   const handleAcceptSimpleSizes = () => {
     setSimpleSizes(selectedSimpleSizes);
     setIsSimpleSizeModalOpen(false);
   };
 
+  // =========================
+  // Compuestos
+  // =========================
 
-  // Abrir Modal compuesto
   const handleOpenCompositeModal = () => {
-    setSelectedCompositeSizes(simpleSizes);
-    setIsCompositeSizeModalOpen(true)
-  }
+    setSelectedCompositeSizes(compositeSizes);
+    setIsCompositeSizeModalOpen(true);
+  };
 
-  // Cerrar Modal compuesto
   const handleCloseCompositeModal = () => {
-    setIsCompositeSizeModalOpen(false);
-  }
-
-  // Función para aceptar los números compuestos seleccionados
-  const handleAcceptCompositeSizes = () => {
-    setCompositeSizes(selectedSimpleSizes);
     setIsCompositeSizeModalOpen(false);
   };
 
+  const handleAcceptCompositeSizes = () => {
+    setCompositeSizes(selectedCompositeSizes);
+    setIsCompositeSizeModalOpen(false);
+  };
 
   return {
     // Estados
@@ -69,5 +87,5 @@ export function useProductOrder() {
     handleOpenCompositeModal,
     handleCloseCompositeModal,
     handleAcceptCompositeSizes,
-  }
+  };
 }

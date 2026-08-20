@@ -13,7 +13,7 @@ type Props = {
   onAccept: () => void;
 }
 
-const SimpleSizes = ({
+const SimpleSizesCard = ({
   selectedSimpleSizes,
   setSelectedSimpleSizes,
   onCancel,
@@ -83,4 +83,4 @@ const SimpleSizes = ({
   )
 }
 
-export default SimpleSizes;
+export default SimpleSizesCard;

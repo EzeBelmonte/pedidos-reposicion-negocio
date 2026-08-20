@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CirclePlus } from "lucide-react";
 import type { OrderItem } from "@/types/order.type";
 import type { ShoeSize } from "@/types/shoes.type";
@@ -7,6 +7,19 @@ import OrderProductCard from "../components/OrderProductCard";
 
 const Order = () => {
   const [items, setItems] = useState<OrderItem[]>([]);
+
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (items.length === 0) {
+      return;
+    }
+
+    bottomRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, [items.length]);
 
   const handleAddProduct = () => {
     setItems((currentItems) => [
@@ -63,8 +76,8 @@ const Order = () => {
   }
 
   return (
-    <section className="flex flex-col items-center px-5">
-      <h1 className="bg-gray-600 px-5 py-1 text-white text-[1.7rem] font-bold mb-[25px] rounded mt-5">
+    <section className="flex flex-col items-center px-5 py-10">
+      <h1 className="bg-gray-600 px-5 py-1 text-white text-[1.7rem] font-bold mb-[25px] rounded">
         Armar pedido
       </h1>
 
@@ -94,6 +107,7 @@ const Order = () => {
         />
       ))}
 
+      <div ref={bottomRef} />
     </section>
   );
 }
