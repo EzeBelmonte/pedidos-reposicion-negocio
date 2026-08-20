@@ -12,8 +12,10 @@
   "dependencies": {
     "@capacitor/core": "^8.5.0",
     "@capacitor/preferences": "^8.0.1",
+    "@radix-ui/react-dialog": "^1.1.23",
     "@tailwindcss/vite": "^4.3.3",
     "clsx": "^2.1.1",
+    "framer-motion": "^13.1.0",
     "lucide-react": "^1.32.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

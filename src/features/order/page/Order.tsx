@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CirclePlus } from "lucide-react";
-import type { OrderItem, ShoeSize } from "@/types/order.type";
+import type { OrderItem } from "@/types/order.type";
+import type { ShoeSize } from "@/types/shoes.type";
 import { Button } from "@/components";
 import OrderProductCard from "../components/OrderProductCard";
 
