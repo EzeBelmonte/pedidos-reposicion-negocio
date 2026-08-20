@@ -50,8 +50,20 @@ export const ProductForm = ({
     setArticle("");
   }
 
+  const button = "text-[1.2rem] font-semibold px-3 py-1 rounded text-white";
+
   return (
-    <form onSubmit={handleSubmit} className="w-[500px] flex flex-col items-center border border-white p-5 rounded">
+    <form 
+      onSubmit={handleSubmit} 
+      className="
+        w-[500px] 
+        flex flex-col 
+        items-center 
+        border border-black 
+        bg-[#e5f5f5]
+        p-5 rounded 
+        text-black font-semibold text-[1.1rem]"
+    >
       <div className="w-full flex flex-col gap-5 mb-5">
         <Input 
           value={brand}
@@ -73,7 +85,7 @@ export const ProductForm = ({
       )}>
         <Button 
           type="submit"
-          className="bg-green-700 text-[1.2rem] font-semibold px-3 py-1 rounded"
+          className={cn("bg-green-700", button)}
         >
           {product
             ? "Guardar cambios"
@@ -85,7 +97,7 @@ export const ProductForm = ({
           <Button
             type="button"
             onClick={onCancel}
-            className="bg-red-700 text-[1.2rem] font-semibold px-3 py-1 rounded"
+            className={cn("bg-red-700", button)}
           >
             Cancelar
           </Button>

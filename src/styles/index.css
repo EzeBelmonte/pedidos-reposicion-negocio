@@ -15,7 +15,7 @@
 ========================== */
 @layer base {
   body {
-    @apply bg-fixed bg-linear-[-10deg] from-[#111111] to-[#010b13]; /* 0f0f0f */
+    @apply bg-fixed bg-linear-[-10deg] from-[#ffffff] to-[#ffffff]; 
   }
 }
 
