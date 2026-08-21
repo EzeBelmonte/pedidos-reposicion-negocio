@@ -1,23 +1,19 @@
 import type { OrderList } from "@/types/order.type";
-
+import { useOrders } from "@/app/hooks/useOrders";
 import { formatNormalDate } from "@/helpers/formatterDate.helper";
-
 import { Button } from "@/components";
 
 type Props = {
   order: OrderList;
-  removeOrder: (id: number) => void;
-  updateOrderStatus: (
-    id: number,
-    status: OrderList["status"]
-  ) => void;
 }
 
 const OrderPendingCard = ({ 
   order,
-  updateOrderStatus,
-  removeOrder
 }: Props) => {
+  const {
+    removeOrder,
+    updateOrderStatus,
+  } = useOrders();
 
   return (
     <article className="

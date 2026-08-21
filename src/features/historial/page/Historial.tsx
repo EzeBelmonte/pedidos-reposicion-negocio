@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import { CircleChevronLeft } from "lucide-react";
 import { Button } from "@/components";
-import { useOrders } from "@/features/order/hooks/useOrders";
+import { useOrders } from "@/app/hooks/useOrders";
 import HistorialCard from "../components/HistorialCard";
 
 const Historial = () => {
   const {
     orders,
-    removeOrder,
   } = useOrders();
 
+  console.log(orders.length)
   return (
     <section className="w-full flex flex-col items-center px-5 py-10 mt-10">
       <Link to="/">
@@ -19,12 +19,11 @@ const Historial = () => {
       </Link>
 
       {orders
-        .filter((order) => order.status === "pending")
+        .filter((order) => order.status === "done")
         .map((order) => (
           <HistorialCard 
             key={order.id} 
             order={order} 
-            removeOrder={removeOrder}
           />
         ))
       }

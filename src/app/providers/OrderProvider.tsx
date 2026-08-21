@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { createContext, useCallback, useMemo, useState, useEffect, type ReactNode } from "react";
 
 import type { OrderList } from "@/types/order.type";
+import type { OrderContextType } from "../types/orderContextType.type";
 
 import {
   getOrders,
@@ -8,9 +9,16 @@ import {
   updateOrder,
   updateOrderStatusStorage,
   deleteOrder,
-} from "../services/orders.storage";
+} from "../../services/orders.storage";
 
-export function useOrders() {
+export const OrderContext =
+  createContext<OrderContextType | null>(null);
+
+type Props = {
+  children: ReactNode;
+}
+
+export function OrderProvider({ children }: Props) {
   const [orders, setOrders] = useState<OrderList[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +36,7 @@ export function useOrders() {
     }
   }, []);
 
-  const addOrder = (order: OrderList) => {
+  const addOrder = useCallback((order: OrderList) => {
     try {
       createOrder(order);
 
@@ -42,9 +50,9 @@ export function useOrders() {
 
       setError("No se pudo guardar el pedido.");
     }
-  }
+  }, []);
 
-  const editOrder = (order: OrderList) => {
+  const editOrder = useCallback((order: OrderList) => {
     try {
       updateOrder(order);
 
@@ -62,9 +70,9 @@ export function useOrders() {
 
       setError("No se pudo actualizar el pedido.");
     }
-  }
+  }, []);
 
-  const updateOrderStatus = (
+  const updateOrderStatus = useCallback((
     id: number,
     status: OrderList["status"]
   ) => {
@@ -89,9 +97,9 @@ export function useOrders() {
 
       setError("No se pudo actualizar el estado del pedido.");
     }
-  }
+  }, []);
 
-  const removeOrder = (id: number) => {
+  const removeOrder = useCallback((id: number) => {
     try {
       deleteOrder(id);
 
@@ -107,18 +115,32 @@ export function useOrders() {
 
       setError("No se pudo eliminar el pedido.");
     }
-  }
+  }, []);
 
-  return {
-    // Estados
-    orders,
-    isLoading,
-    error,
+  const value = useMemo(
+    () => ({
+      orders,
+      isLoading,
+      error,
+      addOrder,
+      editOrder,
+      updateOrderStatus,
+      removeOrder,
+    }),
+    [
+      orders,
+      isLoading,
+      error,
+      addOrder,
+      editOrder,
+      updateOrderStatus,
+      removeOrder,
+    ]
+  );
 
-    // Acciones
-    addOrder,
-    editOrder,
-    updateOrderStatus,
-    removeOrder,
-  }
+  return (
+    <OrderContext.Provider value={value}>
+      {children}
+    </OrderContext.Provider>
+  )
 }

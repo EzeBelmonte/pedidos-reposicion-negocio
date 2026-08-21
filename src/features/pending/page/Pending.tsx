@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
 import { CircleChevronLeft } from "lucide-react";
 import { Button } from "@/components";
-import { useOrders } from "@/features/order/hooks/useOrders";
+import { useOrders } from "@/app/hooks/useOrders";
 import OrderPendingCard from "../components/OrderPendingCard";
 
 const Pending = () => {
   const {
     orders,
-    removeOrder,
-    updateOrderStatus,
   } = useOrders();
 
   return (
@@ -25,8 +23,6 @@ const Pending = () => {
           <OrderPendingCard 
             key={order.id} 
             order={order} 
-            updateOrderStatus={updateOrderStatus}
-            removeOrder={removeOrder}
           />
         ))
       }

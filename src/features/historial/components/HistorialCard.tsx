@@ -1,19 +1,20 @@
 import type { OrderList } from "@/types/order.type";
 
 import { formatNormalDate } from "@/helpers/formatterDate.helper";
-
+import { useOrders } from "@/app/hooks/useOrders";
 import { Button } from "@/components";
 
 type Props = {
   order: OrderList;
-  removeOrder: (id: number) => void;
 }
 
 const HistorialCard = ({ 
   order,
-  removeOrder
 }: Props) => {
-
+  const {
+    removeOrder,
+  } = useOrders();
+  
   return (
     <article className="
       w-full max-w-[600px] 

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import {  CircleChevronLeft } from "lucide-react";
-import { useOrders } from "../hooks/useOrders";
+import { useOrders } from "@/app/hooks/useOrders";
 
 import { Button, AlertError } from "@/components";
 import type { OrderList } from "@/types/order.type";
