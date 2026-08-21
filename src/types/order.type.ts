@@ -8,6 +8,7 @@ export type OrderItem = {
 export type OrderList = {
   id: number;
   title?: string;
+  status: "pending" | "done";
   items: OrderItem[];
   createdAt: string;
   updatedAt: string;

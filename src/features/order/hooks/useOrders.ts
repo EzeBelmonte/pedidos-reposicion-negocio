@@ -6,6 +6,7 @@ import {
   getOrders,
   createOrder,
   updateOrder,
+  updateOrderStatusStorage,
   deleteOrder,
 } from "../services/orders.storage";
 
@@ -63,6 +64,33 @@ export function useOrders() {
     }
   }
 
+  const updateOrderStatus = (
+    id: number,
+    status: OrderList["status"]
+  ) => {
+    try {
+      updateOrderStatusStorage(id, status);
+
+      setOrders((currentOrders) =>
+        currentOrders.map((order) => 
+          order.id === id
+            ? {
+                ...order,
+                status,
+                updatedAt: new Date().toISOString(),
+              }
+            : order
+        )
+      );
+
+      setError(null);
+    } catch (error) {
+      console.error(error);
+
+      setError("No se pudo actualizar el estado del pedido.");
+    }
+  }
+
   const removeOrder = (id: number) => {
     try {
       deleteOrder(id);
@@ -90,6 +118,7 @@ export function useOrders() {
     // Acciones
     addOrder,
     editOrder,
+    updateOrderStatus,
     removeOrder,
   }
 }

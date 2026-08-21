@@ -68,6 +68,31 @@ export const updateOrder = (updateOrder: OrderList) => {
 }
 
 //===================================
+// ACTUALIZAR ORDEN STATUS
+//===================================
+export const updateOrderStatusStorage = (
+  id: number,
+  status: OrderList["status"]
+) => {
+  const orders = getOrders();
+
+  const updatedOrders = orders.map((order) =>
+    order.id === id
+      ? {
+          ...order,
+          status,
+          updatedAt: new Date().toISOString(),
+        }
+      : order
+  );
+
+  localStorage.setItem(
+    ORDERS_STORAGE_KEY,
+    JSON.stringify(updatedOrders)
+  );
+}
+
+//===================================
 // ELIMINAR ORDEN
 //===================================
 export const deleteOrder = (id: number) => {
