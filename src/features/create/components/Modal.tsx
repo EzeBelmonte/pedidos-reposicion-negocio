@@ -40,7 +40,7 @@ const Modal = ({
           asChild
           className={cn(`
             fixed
-            w-[550px]
+            w-full
             px-2
             outline-none
             top-10 

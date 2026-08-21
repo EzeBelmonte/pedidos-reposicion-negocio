@@ -47,8 +47,10 @@ const Produtcs = () => {
     return a.article.localeCompare(b.article);
   });
 
+  const noProducts = sortedProducts.length === 0;
+
   return (
-    <section className="w-full flex flex-col items-center mb-10">
+    <section className="flex flex-col items-center px-1 p-5 mt-12">
       <Link to="/">
         <Button className="absolute top-2 left-2 font-semiboldpx-2 py-1 rounded font-semibold">
           <CircleChevronLeft size={30} />
@@ -66,16 +68,22 @@ const Produtcs = () => {
         onCancel={() => setEditingProduct(undefined)}
       />
 
-      <ul className="
-        w-[500px] max-h-[500px] 
-        overflow-y-auto 
-        flex flex-col 
-        mt-10 p-2
-        bg-[#2b6de7]
-        border border-black
-        rounded
-      ">
-        {sortedProducts.map((product, index) => (
+
+      <ul className={cn(`
+          w-full
+          overflow-y-auto 
+          flex flex-col 
+          mt-10 p-2
+          bg-[#2b6de7]
+          border border-black
+          rounded`,
+          noProducts && "text-white font-semibold"
+      )}>
+        {noProducts 
+
+          ? "No hay productos agregados"
+
+          : sortedProducts.map((product, index) => (
           <li 
             key={product.id} 
             className={cn(`

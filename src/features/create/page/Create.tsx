@@ -7,7 +7,7 @@ import type { OrderList } from "@/types/order.type";
 import OrderForm from "../components/OrderForm";
 
 
-const Order = () => {
+const Create = () => {
   const {
     addOrder,
     error,
@@ -23,7 +23,7 @@ const Order = () => {
 
   return (
 
-    <section className="flex flex-col items-center px-5 py-10">
+    <section className="flex flex-col items-center px-1 p-5 mt-12">
       <Link to="/">
         <Button className="absolute top-2 left-2 font-semiboldpx-2 py-1 rounded font-semibold">
           <CircleChevronLeft size={30} />
@@ -41,4 +41,4 @@ const Order = () => {
   );
 }
 
-export default Order;
+export default Create;

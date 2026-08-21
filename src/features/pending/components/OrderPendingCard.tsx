@@ -17,9 +17,9 @@ const OrderPendingCard = ({
 
   return (
     <article className="
-      w-full max-w-[600px] 
+      w-full
       flex justify-between items-center
-      px-5 py-2 my-1
+      px-2 py-2 my-1
       rounded
       bg-amber-400
       border border-black/40
@@ -29,7 +29,7 @@ const OrderPendingCard = ({
         <p>Pedido creado: <span className="font-semibold">{formatNormalDate(order.createdAt)}</span></p>
       </div>
 
-      <div className="flex gap-3 font-semibold">
+      <div className="flex flex-col gap-3 font-semibold">
         <Button
           onClick={() => updateOrderStatus(order.id, "done")}
           className="

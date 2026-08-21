@@ -4,7 +4,7 @@ import type { OrderItem } from "@/types/order.type";
 import type { ShoeSize } from "@/types/shoes.type";
 
 import Modal from "../Modal";
-import { Button } from "@/components";
+import { Input } from "@/components";
 import SimpleSizesCard from "./SimpleSizesCard";
 
 type Props = {
@@ -33,72 +33,68 @@ const SimpleSizes = ({
 }: Props) => {
 
   // Agregar pares
-  const handleAdd = (
-    item: OrderItem,
+  const handleChangeQuantity = (
+    e: React.ChangeEvent<HTMLInputElement>,
     size: ShoeSize
   ) => {
-    const currentQuantity =
-      item.quantities[size] ?? 0;
+    const value = e.target.value;
 
-    onChangeQuantity(
-      size,
-      currentQuantity + 1
-    );
+    if (value === "") {
+      onChangeQuantity(size, 0);
+      return;
+    }
+
+    onChangeQuantity(size, Number(value));
   }
   
-  // Quitar pares
-  const handleRemove = (
-    item: OrderItem,
-    size: ShoeSize
-  ) => {
-    const currentQuantity =
-      item.quantities[size] ?? 0;
 
-    if (currentQuantity > 0) {
-      onChangeQuantity(
-        size,
-        currentQuantity - 1
-      );
-    }
-  }
 
   return (
     <>
       {simpleSizes.length > 0 && (
         <div className="
-          flex flex-wrap gap-2 items-center
+          grid grid-cols-4 justify-items-center gap-2
         ">
           {simpleSizes.map((size) => (
             <div
               key={size}
               className="
-                w-[46px]
+                w-full
                 bg-white
                 flex flex-col 
                 items-center 
-                border border-black -space-y-2 
+                border border-black 
                 rounded"
             >
-              <span className="text-[1.1rem] font-bold">
+              <span className="text-[1.1rem] font-semibold">
                 {size}
               </span>
 
-              <div className="flex items-center">
-                <Button
-                  onClick={() => handleRemove(item, size)}
-                  className="text-black font-bold text-[1.3rem]"
-                >
-                  -
-                </Button>
+              <div className="w-full flex justify-center mt-1 px-2 py-1">
+                <Input 
+                  type="number"
+                  min={0}
+                  value={item.quantities[size] ?? 0}
+                  placeholder="0"
+                  onChange={(e) => handleChangeQuantity(e, size)}
+                  onFocus={(e) => {
+                    if (e.target.value === "0") {
+                      e.target.select();
+                    }
+                  }}
+                  className="
+                    w-full
+                    text-center
+                    font-bold
+                    border
+                    border-black
+                    rounded
+                    py-1
+                    outline-none
+                    focus:border-black
+                  "
+                />
 
-                <span className="mx-1">{item.quantities[size] ?? 0}</span>
-
-                <Button
-                  onClick={() => handleAdd(item, size)}
-                  className="text-black font-bold text-[1.1rem]"
-                >
-                  +
-                </Button>
               </div>
             </div>
           ))}

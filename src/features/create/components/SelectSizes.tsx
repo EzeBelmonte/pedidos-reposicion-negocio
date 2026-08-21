@@ -1,5 +1,5 @@
 import { Trash } from "lucide-react";
-import { useProductOrder } from "../hooks/useProductOrder";
+import { useSizes } from "../hooks/useSizes";
 import type { OrderItem } from "@/types/order.type";
 import type { ShoeSize } from "@/types/shoes.type";
 import { 
@@ -20,7 +20,7 @@ type Props = {
   onRemove: () => void;
 }
 
-const OrderProductCard = ({ 
+const SelectSizes = ({ 
   item,
   onChangeProduct, 
   onChangeQuantity,
@@ -42,7 +42,7 @@ const OrderProductCard = ({
     handleOpenCompositeModal,
     handleCloseCompositeModal,
     handleAcceptCompositeSizes,
-  } = useProductOrder();
+  } = useSizes();
 
   return (
     <article className="w-full border border-black rounded p-4 mt-4 bg-[#2b6de7] font-semibold">
@@ -87,14 +87,14 @@ const OrderProductCard = ({
               onClick={handleOpenSimpleModal}
               className="bg-[#ffffff] text-black px-2 py-1 rounded"
             >
-              Número simple
+              Número X
             </Button>
 
             <Button
               onClick={handleOpenCompositeModal}
               className="bg-[#ffffff] text-black px-2 py-1 rounded"
             >
-              Número compuesto
+              Número X/Y
             </Button>
           </div>
 
@@ -111,4 +111,4 @@ const OrderProductCard = ({
   );
 }
 
-export default OrderProductCard;
+export default SelectSizes;

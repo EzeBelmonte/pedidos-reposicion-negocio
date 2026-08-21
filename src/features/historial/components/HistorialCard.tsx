@@ -17,9 +17,9 @@ const HistorialCard = ({
   
   return (
     <article className="
-      w-full max-w-[600px] 
+      w-full
       flex justify-between items-center
-      px-5 py-2 my-1
+      px-2 py-2 my-1
       rounded
       bg-amber-400
       border border-black/40

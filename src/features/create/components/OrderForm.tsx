@@ -4,7 +4,7 @@ import { CirclePlus } from "lucide-react";
 import type { OrderItem, OrderList } from "@/types/order.type";
 import type { ShoeSize } from "@/types/shoes.type";
 
-import OrderProductCard from "../components/OrderProductCard";
+import SelectSizes from "./SelectSizes";
 
 import { cn } from "@/utils/cn";
 
@@ -135,7 +135,7 @@ const OrderForm = ({
         className="
           bg-blue-500
           text-white font-semibold 
-          p-2 rounded-2xl
+          p-2 rounded
           fixed
           bottom-5 right-5"
       >
@@ -143,7 +143,7 @@ const OrderForm = ({
       </Button>
 
       {items.map((item, index) => (
-        <OrderProductCard 
+        <SelectSizes 
           key={index} 
           item={item}
           onChangeProduct={(productId) =>

@@ -1,5 +1,5 @@
 // ORDER
-export { default as Order } from "./order/page/Order";
+export { default as Create } from "./create/page/Create";
 
 // PRODUCTS
 export { default as Products } from "./products/page/Produtcs";

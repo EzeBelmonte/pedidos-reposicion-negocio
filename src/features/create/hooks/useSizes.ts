@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import type { ShoeSize } from "@/types/shoes.type";
 
-export function useProductOrder() {
+export function useSizes() {
   // =========================
   // Números simples
   // =========================

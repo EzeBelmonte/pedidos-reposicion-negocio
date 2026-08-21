@@ -13,12 +13,12 @@ export const Aplication = () => {
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center">
 
-      <h1 className="bg-gray-600 px-5 py-1 text-white text-[3rem] font-bold mb-[25px] rounded">
+      <h1 className="bg-gray-600 px-5 py-1 text-white text-[2.3rem] font-bold mb-[25px] rounded">
         Menú principal
       </h1>
 
       <div className="flex flex-col items-center gap-4">
-        <Link to="/order" className="relative flex items-center">
+        <Link to="/create" className="relative flex items-center">
           <PackagePlus
             size={60}
             className={icon}
@@ -31,7 +31,7 @@ export const Aplication = () => {
               "pl-14" // espacio para que el texto no quede debajo del ícono
             )}
           >
-            <span className="mx-auto">Crear pedido</span>
+            <span className="mx-auto">Crear</span>
           </Button>
         </Link>
 

@@ -56,7 +56,7 @@ export const ProductForm = ({
     <form 
       onSubmit={handleSubmit} 
       className="
-        w-[500px] 
+        w-full
         flex flex-col 
         items-center 
         border border-black 

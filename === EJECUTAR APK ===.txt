@@ -1,0 +1,7 @@
+pnpm exec cap open android
+
+console.log({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  devicePixelRatio: window.devicePixelRatio,
+});

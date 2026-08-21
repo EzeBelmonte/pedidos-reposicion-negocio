@@ -45,7 +45,7 @@ const SelectProduct = ({
           value === "" ? null : Number(value)
         );
       }}
-      className="p-1 text-[1.1rem] border border-black bg-white"
+      className="p-1 border border-black bg-white"
     >
       <option value="">
         Seleccionar producto
