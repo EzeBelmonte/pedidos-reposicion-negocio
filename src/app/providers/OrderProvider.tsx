@@ -52,6 +52,10 @@ export function OrderProvider({ children }: Props) {
     }
   }, []);
 
+  const orderById = useCallback((orderId: number) => {
+    return orders.find((order) => order.id === orderId);
+  }, [orders]);
+
   const editOrder = useCallback((order: OrderList) => {
     try {
       updateOrder(order);
@@ -123,6 +127,7 @@ export function OrderProvider({ children }: Props) {
       isLoading,
       error,
       addOrder,
+      orderById,
       editOrder,
       updateOrderStatus,
       removeOrder,
@@ -132,6 +137,7 @@ export function OrderProvider({ children }: Props) {
       isLoading,
       error,
       addOrder,
+      orderById,
       editOrder,
       updateOrderStatus,
       removeOrder,

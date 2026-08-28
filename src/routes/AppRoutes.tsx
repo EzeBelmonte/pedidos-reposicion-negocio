@@ -2,7 +2,8 @@ import { Routes, Route } from "react-router-dom";
 
 import { Aplication } from "@/pages/Aplication";
 import { 
-  Create,
+  CreateOrder,
+  EditOrder,
   Products,
   Pending,
   Historial
@@ -12,7 +13,8 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Aplication />} />
-      <Route path="/create" element={<Create />} />
+      <Route path="/create" element={<CreateOrder />} />
+      <Route path="/:id" element={<EditOrder />} />
       <Route path="/products" element={<Products />} />
       <Route path="/pending" element={<Pending />} />
       <Route path="/historial" element={<Historial />} />

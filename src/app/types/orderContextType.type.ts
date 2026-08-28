@@ -6,6 +6,7 @@ export interface OrderContextType {
   error: string | null;
 
   addOrder: (order: OrderList) => void;
+  orderById: (orderId: number) => OrderList | undefined;
   editOrder: (order: OrderList) => void;
   updateOrderStatus: (
     id: number,

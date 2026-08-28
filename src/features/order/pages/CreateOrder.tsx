@@ -7,7 +7,7 @@ import type { OrderList } from "@/types/order.type";
 import OrderForm from "../components/OrderForm";
 
 
-const Create = () => {
+const CreateOrder = () => {
   const {
     addOrder,
     error,
@@ -41,4 +41,4 @@ const Create = () => {
   );
 }
 
-export default Create;
+export default CreateOrder;

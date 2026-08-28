@@ -1,5 +1,6 @@
 // ORDER
-export { default as Create } from "./create/page/Create";
+export { default as CreateOrder } from "./order/pages/CreateOrder";
+export { default as EditOrder } from "./order/pages/EditOrder";
 
 // PRODUCTS
 export { default as Products } from "./products/page/Produtcs";
