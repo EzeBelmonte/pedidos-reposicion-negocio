@@ -21,6 +21,8 @@ const EditOrder = () => {
 
   const order = orderById(orderId);
 
+  console.log("EditOrder -> order", order);
+
   if (!order) {
     return <Alert message={"Pedido no encontrado."} />
   }

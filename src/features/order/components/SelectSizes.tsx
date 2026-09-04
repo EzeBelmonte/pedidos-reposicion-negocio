@@ -1,5 +1,6 @@
 import { Trash } from "lucide-react";
-import { useSizes } from "../hooks/useSizes";
+import { useSimpleSizes } from "@/features/order/hooks/useSimpleSizes";
+import { useCompositeSizes } from "@/features/order/hooks/useCompositeSizes";
 import type { OrderItem } from "@/types/order.type";
 import type { ShoeSize } from "@/types/shoes.type";
 import { 
@@ -35,6 +36,11 @@ const SelectSizes = ({
     handleOpenSimpleModal,
     handleCloseSimpleModal,
     handleAcceptSimpleSizes,
+  } = useSimpleSizes({
+    item: item.quantities,
+  });
+
+    const {
     compositeSizes,
     selectedCompositeSizes,
     isCompositeSizeModalOpen,
@@ -42,7 +48,9 @@ const SelectSizes = ({
     handleOpenCompositeModal,
     handleCloseCompositeModal,
     handleAcceptCompositeSizes,
-  } = useSizes();
+  } = useCompositeSizes({
+    item: item.quantities,
+  });
 
   return (
     <article className="w-full border border-black rounded p-4 mt-4 bg-[#2b6de7] font-semibold">
