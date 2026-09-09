@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { PackagePlus, Package, List, FileClock } from "lucide-react";
+import { PackagePlus, Package, List, FileClock, Download } from "lucide-react";
 
 import { Button } from "@/components";
 
@@ -17,7 +17,7 @@ export const Aplication = () => {
         Menú principal
       </h1>
 
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-6">
         <Link to="/create" className="relative flex items-center">
           <PackagePlus
             size={60}
@@ -79,6 +79,21 @@ export const Aplication = () => {
             Historial
           </Button>
         </Link>
+
+        <div className="relative flex items-center">
+          <Download
+            size={60}
+            className={icon}
+          />
+
+          <Button className={cn(
+            "bg-gray-900",
+            button,
+            "pl-5" // espacio para que el texto no quede debajo del ícono
+          )}>
+            Historial
+          </Button>
+        </div>
       </div>
     </main>
   );
