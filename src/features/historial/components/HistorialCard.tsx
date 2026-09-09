@@ -15,6 +15,8 @@ const HistorialCard = ({
     removeOrder,
   } = useOrders();
   
+  console.log(order);
+  
   return (
     <article className="
       w-full

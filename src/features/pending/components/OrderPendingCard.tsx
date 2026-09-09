@@ -19,6 +19,7 @@ const OrderPendingCard = ({
     updateOrderStatus,
   } = useOrders();
 
+  console.log(order);
   return (
     <article className="
       w-full
