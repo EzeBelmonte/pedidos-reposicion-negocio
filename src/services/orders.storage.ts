@@ -1,3 +1,5 @@
+import { Preferences } from "@capacitor/preferences";
+
 import type { OrderList } from "@/types/order.type";
 
 const ORDERS_STORAGE_KEY = "orders";
@@ -5,76 +7,84 @@ const ORDERS_STORAGE_KEY = "orders";
 //===================================
 // OBTENER TODAS LAS ORDENES
 //===================================
-export const getOrders = (): OrderList[] => {
-  const storedOrders = localStorage.getItem(ORDERS_STORAGE_KEY);
+export const getOrders = async (): Promise<OrderList[]> => {
+  const { value } = await Preferences.get({
+    key: ORDERS_STORAGE_KEY,
+  });
 
-  if (!storedOrders) {
+  if (!value) {
     return [];
   }
 
-  return JSON.parse(storedOrders);
-}
+  return JSON.parse(value);
+};
 
 //===================================
-// GUARDAR ORDEN
+// GUARDAR ORDENES
 //===================================
-export const saveOrders = (orders: OrderList[]) => {
-  localStorage.setItem(
-    ORDERS_STORAGE_KEY,
-    JSON.stringify(orders)
-  );
-}
+export const saveOrders = async (
+  orders: OrderList[]
+): Promise<void> => {
+  await Preferences.set({
+    key: ORDERS_STORAGE_KEY,
+    value: JSON.stringify(orders),
+  });
+};
 
 //===================================
 // CREAR ORDEN
 //===================================
-export const createOrder = (order: OrderList) => {
-  const orders = getOrders();
+export const createOrder = async (
+  order: OrderList
+): Promise<void> => {
+  const orders = await getOrders();
 
   const updatedOrders = [
     ...orders,
     order,
   ];
 
-  saveOrders(updatedOrders);
-}
+  await saveOrders(updatedOrders);
+};
 
 //===================================
 // OBTENER ORDEN POR ID
 //===================================
-export const getOrderById = (
+export const getOrderById = async (
   id: number
-): OrderList | undefined => {
-  const orders = getOrders();
+): Promise<OrderList | undefined> => {
+  const orders = await getOrders();
 
   return orders.find(
     (order) => order.id === id
   );
-}
+};
 
 //===================================
 // ACTUALIZAR ORDEN
 //===================================
-export const updateOrder = (updateOrder: OrderList) => {
-  const orders = getOrders();
+export const updateOrder = async (
+  updatedOrder: OrderList
+): Promise<void> => {
+  const orders = await getOrders();
 
-  const updatedOrders = orders.map((order) => 
-    order.id === updateOrder.id
-    ? updateOrder
-    : order
+  const updatedOrders = orders.map((order) =>
+    order.id === updatedOrder.id
+      ? updatedOrder
+      : order
   );
 
-  saveOrders(updatedOrders);
-}
+  await saveOrders(updatedOrders);
+};
 
 //===================================
 // ACTUALIZAR ORDEN STATUS
 //===================================
-export const updateOrderStatusStorage = (
+export const updateOrderStatusStorage = async (
   id: number,
   status: OrderList["status"]
-) => {
-  const orders = getOrders();
+): Promise<void> => {
+  const orders = await getOrders();
 
   const updatedOrders = orders.map((order) =>
     order.id === id
@@ -86,21 +96,20 @@ export const updateOrderStatusStorage = (
       : order
   );
 
-  localStorage.setItem(
-    ORDERS_STORAGE_KEY,
-    JSON.stringify(updatedOrders)
-  );
-}
+  await saveOrders(updatedOrders);
+};
 
 //===================================
 // ELIMINAR ORDEN
 //===================================
-export const deleteOrder = (id: number) => {
-  const orders = getOrders();
+export const deleteOrder = async (
+  id: number
+): Promise<void> => {
+  const orders = await getOrders();
 
   const updatedOrders = orders.filter(
     (order) => order.id !== id
   );
 
-  saveOrders(updatedOrders);
-}
+  await saveOrders(updatedOrders);
+};

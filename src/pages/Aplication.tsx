@@ -80,7 +80,7 @@ export const Aplication = () => {
           </Button>
         </Link>
 
-        <div className="relative flex items-center">
+        <Link to="/download" className="relative flex items-center">
           <Download
             size={60}
             className={icon}
@@ -91,9 +91,9 @@ export const Aplication = () => {
             button,
             "pl-5" // espacio para que el texto no quede debajo del ícono
           )}>
-            Historial
+            Descargar
           </Button>
-        </div>
+        </Link>
       </div>
     </main>
   );

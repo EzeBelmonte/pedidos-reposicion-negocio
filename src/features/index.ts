@@ -10,3 +10,6 @@ export { default as Pending } from "./pending/page/Pending";
 
 // HISTORIAL
 export { default as Historial } from "./historial/page/Historial";
+
+// DESCARGA
+export { default as Download } from "./download/pages/Download";

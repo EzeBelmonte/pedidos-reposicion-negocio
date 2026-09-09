@@ -6,7 +6,8 @@ import {
   EditOrder,
   Products,
   Pending,
-  Historial
+  Historial,
+  Download,
 } from "@/features";
 
 export default function AppRoutes() {
@@ -18,6 +19,7 @@ export default function AppRoutes() {
       <Route path="/products" element={<Products />} />
       <Route path="/pending" element={<Pending />} />
       <Route path="/historial" element={<Historial />} />
+      <Route path="/download" element={<Download />} />
     </Routes>
   );
 }

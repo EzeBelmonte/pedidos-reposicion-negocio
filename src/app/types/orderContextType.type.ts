@@ -5,13 +5,13 @@ export interface OrderContextType {
   isLoading: boolean;
   error: string | null;
 
-  addOrder: (order: OrderList) => void;
+  addOrder: (order: OrderList) => Promise<void>;
   orderById: (orderId: number) => OrderList | undefined;
-  editOrder: (order: OrderList) => void;
+  editOrder: (order: OrderList) => Promise<void>;
   updateOrderStatus: (
     id: number,
     status: OrderList["status"]
-  ) => void;
-  removeOrder: (id: number) => void;
+  ) => Promise<void>;
+  removeOrder: (id: number) => Promise<void>;
 
 }

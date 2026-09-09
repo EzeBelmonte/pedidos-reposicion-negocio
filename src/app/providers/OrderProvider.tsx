@@ -1,6 +1,14 @@
-import { createContext, useCallback, useMemo, useState, useEffect, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useMemo,
+  useState,
+  useEffect,
+  type ReactNode,
+} from "react";
 
 import type { OrderList } from "@/types/order.type";
+
 import type { OrderContextType } from "../types/orderContextType.type";
 
 import {
@@ -16,110 +24,167 @@ export const OrderContext =
 
 type Props = {
   children: ReactNode;
-}
+};
 
 export function OrderProvider({ children }: Props) {
   const [orders, setOrders] = useState<OrderList[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  //===================================
+  // CARGAR ORDENES
+  //===================================
+
   useEffect(() => {
-    try {
-      const storageOrders = getOrders();
+    const loadOrders = async () => {
+      try {
+        const storageOrders = await getOrders();
 
-      setOrders(storageOrders);
-      setError(null);
-    } catch (error) {
-      console.error("No se puedieron cargar los pedidos.");
-    } finally {
-      setIsLoading(false);
-    }
+        setOrders(storageOrders);
+        setError(null);
+      } catch (error) {
+        console.error(
+          "No se pudieron cargar los pedidos.",
+          error
+        );
+
+        setError("No se pudieron cargar los pedidos.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadOrders();
   }, []);
 
-  const addOrder = useCallback((order: OrderList) => {
-    try {
-      createOrder(order);
+  //===================================
+  // AGREGAR ORDEN
+  //===================================
 
-      setOrders((currentOrders) => [
-        ...currentOrders,
-        order,
-      ]);
-      setError(null);
-    } catch (error) {
-      console.error(error);
+  const addOrder = useCallback(
+    async (order: OrderList) => {
+      try {
+        await createOrder(order);
 
-      setError("No se pudo guardar el pedido.");
-    }
-  }, []);
+        setOrders((currentOrders) => [
+          ...currentOrders,
+          order,
+        ]);
 
-  const orderById = useCallback((orderId: number) => {
-    return orders.find((order) => order.id === orderId);
-  }, [orders]);
+        setError(null);
+      } catch (error) {
+        console.error(error);
 
-  const editOrder = useCallback((order: OrderList) => {
-    try {
-      updateOrder(order);
+        setError("No se pudo guardar el pedido.");
+      }
+    },
+    []
+  );
 
-      setOrders((currentOrders) =>
-        currentOrders.map((currentOrder) =>
-          currentOrder.id === order.id
-            ? order
-            : currentOrder
-        )
+  //===================================
+  // OBTENER ORDEN POR ID
+  //===================================
+
+  const orderById = useCallback(
+    (orderId: number) => {
+      return orders.find(
+        (order) => order.id === orderId
       );
+    },
+    [orders]
+  );
 
-      setError(null);
-    } catch (error) {
-      console.error(error);
+  //===================================
+  // EDITAR ORDEN
+  //===================================
 
-      setError("No se pudo actualizar el pedido.");
-    }
-  }, []);
+  const editOrder = useCallback(
+    async (order: OrderList) => {
+      try {
+        await updateOrder(order);
 
-  const updateOrderStatus = useCallback((
-    id: number,
-    status: OrderList["status"]
-  ) => {
-    try {
-      updateOrderStatusStorage(id, status);
+        setOrders((currentOrders) =>
+          currentOrders.map((currentOrder) =>
+            currentOrder.id === order.id
+              ? order
+              : currentOrder
+          )
+        );
 
-      setOrders((currentOrders) =>
-        currentOrders.map((order) => 
-          order.id === id
-            ? {
-                ...order,
-                status,
-                updatedAt: new Date().toISOString(),
-              }
-            : order
-        )
-      );
+        setError(null);
+      } catch (error) {
+        console.error(error);
 
-      setError(null);
-    } catch (error) {
-      console.error(error);
+        setError("No se pudo actualizar el pedido.");
+      }
+    },
+    []
+  );
 
-      setError("No se pudo actualizar el estado del pedido.");
-    }
-  }, []);
+  //===================================
+  // ACTUALIZAR STATUS
+  //===================================
 
-  const removeOrder = useCallback((id: number) => {
-    try {
-      deleteOrder(id);
+  const updateOrderStatus = useCallback(
+    async (
+      id: number,
+      status: OrderList["status"]
+    ) => {
+      try {
+        await updateOrderStatusStorage(id, status);
 
-      setOrders((currentOrders) =>
-        currentOrders.filter(
-          (order) => order.id !== id
-        )
-      );
+        setOrders((currentOrders) =>
+          currentOrders.map((order) =>
+            order.id === id
+              ? {
+                  ...order,
+                  status,
+                  updatedAt: new Date().toISOString(),
+                }
+              : order
+          )
+        );
 
-      setError(null);
-    } catch (error) {
-      console.error(error);
+        setError(null);
+      } catch (error) {
+        console.error(error);
 
-      setError("No se pudo eliminar el pedido.");
-    }
-  }, []);
+        setError(
+          "No se pudo actualizar el estado del pedido."
+        );
+      }
+    },
+    []
+  );
+
+  //===================================
+  // ELIMINAR ORDEN
+  //===================================
+
+  const removeOrder = useCallback(
+    async (id: number) => {
+      try {
+        await deleteOrder(id);
+
+        setOrders((currentOrders) =>
+          currentOrders.filter(
+            (order) => order.id !== id
+          )
+        );
+
+        setError(null);
+      } catch (error) {
+        console.error(error);
+
+        setError("No se pudo eliminar el pedido.");
+      }
+    },
+    []
+  );
+
+  //===================================
+  // CONTEXT VALUE
+  //===================================
 
   const value = useMemo(
     () => ({
@@ -148,5 +213,5 @@ export function OrderProvider({ children }: Props) {
     <OrderContext.Provider value={value}>
       {children}
     </OrderContext.Provider>
-  )
+  );
 }
