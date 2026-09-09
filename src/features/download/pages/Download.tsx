@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
+import { CircleChevronLeft } from "lucide-react";
 import { useOrders } from "@/app/hooks/useOrders";
-import { productsStorage } from "@/storage/productsStorage";
+import { productsStorage } from "@/storage/products.storage";
 import { generateOrdersXlsx } from "@/features/download/services/orders.xlsx";
 import { NativeDownload } from "@/features/download/services/nativeDownload";
 import { Button } from "@/components";
@@ -83,11 +85,17 @@ const Download = () => {
 
   return (
     <section className="flex flex-col items-center justify-center min-h-screen">
+      <Link to="/">
+        <Button className="absolute top-2 left-2 font-semiboldpx-2 py-1 rounded font-semibold">
+          <CircleChevronLeft size={30} />
+        </Button>
+      </Link>
+      
       <h1 className="text-3xl font-bold mb-4">
         Descargar Historial
       </h1>
 
-      <p>
+      <p className="text-center">
         Guardá el historial de pedidos
         en formato Excel
       </p>
@@ -101,7 +109,7 @@ const Download = () => {
           px-4 py-1 rounded
         "
       >
-        Generar Excel
+        Descargar Historial
       </Button>
     </section>
   );

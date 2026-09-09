@@ -12,6 +12,10 @@ const Historial = () => {
   console.log(orders.length)
   return (
     <section className="w-full flex flex-col items-center px-1 py-10 mt-10">
+      <h2 className="w-[300px] bg-gray-600 px-5 py-1 text-white text-[1.7rem] font-bold mb-[25px] rounded">
+        Pedidos realizados
+      </h2>
+
       <Link to="/">
         <Button className="absolute top-2 left-2 font-semiboldpx-2 py-1 rounded font-semibold">
           <CircleChevronLeft size={30} />

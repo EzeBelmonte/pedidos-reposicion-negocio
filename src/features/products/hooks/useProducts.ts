@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Product } from "@/types";
-import { productsStorage } from "@/storage/productsStorage";
+import { productsStorage } from "@/storage/products.storage";
 
 export function useProducts() {
   const [products, setProducts] = useState<Product[]>([]);

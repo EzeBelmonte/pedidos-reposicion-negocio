@@ -30,9 +30,9 @@ const CreateOrder = () => {
         </Button>
       </Link>
 
-      <h1 className="w-[300px] bg-gray-600 px-5 py-1 text-white text-[1.7rem] font-bold mb-[25px] rounded">
+      <h2 className="w-[300px] bg-gray-600 px-5 py-1 text-white text-[1.7rem] font-bold mb-[25px] rounded">
         Armar pedido
-      </h1>
+      </h2>
 
       <OrderForm 
         onSave={handleSave}

@@ -17,7 +17,7 @@ import {
   updateOrder,
   updateOrderStatusStorage,
   deleteOrder,
-} from "../../services/orders.storage";
+} from "../../storage/orders.storage";
 
 export const OrderContext =
   createContext<OrderContextType | null>(null);

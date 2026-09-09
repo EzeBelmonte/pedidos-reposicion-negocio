@@ -57,7 +57,7 @@ export const Aplication = () => {
           />
 
           <Button className={cn(
-            "bg-green-600",
+            "bg-cyan-700",
             button,
             "pl-5" // espacio para que el texto no quede debajo del ícono
           )}>
@@ -87,7 +87,7 @@ export const Aplication = () => {
           />
 
           <Button className={cn(
-            "bg-gray-900",
+            "bg-green-600",
             button,
             "pl-5" // espacio para que el texto no quede debajo del ícono
           )}>

@@ -35,9 +35,9 @@ const EditOrder = () => {
         </Button>
       </Link>
 
-      <h1 className="w-[300px] bg-gray-600 px-5 py-1 text-white text-[1.7rem] font-bold mb-[25px] rounded">
+      <h2 className="w-[300px] bg-gray-600 px-5 py-1 text-white text-[1.7rem] font-bold mb-[25px] rounded">
         Editar pedido
-      </h1>
+      </h2>
 
       <OrderForm 
         order={order}

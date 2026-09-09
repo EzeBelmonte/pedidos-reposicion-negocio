@@ -23,10 +23,10 @@ const HistorialCard = ({
       flex justify-between items-center
       px-2 py-2 my-1
       rounded
-      bg-amber-400
+      bg-green-600
       border border-black/40
     ">
-      <div className="space-y-1">
+      <div className="space-y-1 text-white">
         <p>Proveedor: <span className="font-semibold">{order.title}</span></p>
         <p>Pedido creado: <span className="font-semibold">{formatNormalDate(order.createdAt)}</span></p>
       </div>
