@@ -17,7 +17,7 @@ export const Aplication = () => {
         Menú principal
       </h1>
 
-      <div className="flex flex-col items-center gap-6">
+      <div className="flex flex-col gap-6">
         <Link to="/create" className="relative flex items-center">
           <PackagePlus
             size={60}
@@ -28,10 +28,10 @@ export const Aplication = () => {
             className={cn(
               "bg-blue-600",
               button,
-              "pl-14" // espacio para que el texto no quede debajo del ícono
+              "pr-20" // espacio para que el texto no quede debajo del ícono
             )}
           >
-            <span className="mx-auto">Crear</span>
+            Crear
           </Button>
         </Link>
 
@@ -44,7 +44,7 @@ export const Aplication = () => {
           <Button className={cn(
             "bg-amber-600",
             button,
-            "pl-5" // espacio para que el texto no quede debajo del ícono
+            "pl-5"// espacio para que el texto no quede debajo del ícono
           )}>
             Productos
           </Button>
@@ -59,7 +59,7 @@ export const Aplication = () => {
           <Button className={cn(
             "bg-cyan-700",
             button,
-            "pl-5" // espacio para que el texto no quede debajo del ícono
+            "pl-7"// espacio para que el texto no quede debajo del ícono
           )}>
             Pendientes
           </Button>
@@ -74,7 +74,7 @@ export const Aplication = () => {
           <Button className={cn(
             "bg-violet-600",
             button,
-            "pl-5" // espacio para que el texto no quede debajo del ícono
+            "pr-11"
           )}>
             Historial
           </Button>
@@ -89,7 +89,7 @@ export const Aplication = () => {
           <Button className={cn(
             "bg-green-600",
             button,
-            "pl-5" // espacio para que el texto no quede debajo del ícono
+            "pr-6"
           )}>
             Descargar
           </Button>
